@@ -4,7 +4,7 @@
 #
 Name     : libwnck
 Version  : 2.31.0
-Release  : 4
+Release  : 5
 URL      : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Source0  : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Summary  : Window Navigator Construction Kit library
@@ -14,10 +14,15 @@ Requires: libwnck-bin
 Requires: libwnck-lib
 Requires: libwnck-doc
 Requires: libwnck-locales
+BuildRequires : docbook-xml
 BuildRequires : gettext
+BuildRequires : gtk-doc
+BuildRequires : gtk-doc-dev
 BuildRequires : intltool
+BuildRequires : libxslt-bin
 BuildRequires : perl(XML::Parser)
 BuildRequires : pkgconfig(gtk+-2.0)
+BuildRequires : pkgconfig(libstartup-notification-1.0)
 BuildRequires : pkgconfig(x11)
 
 %description
@@ -39,6 +44,7 @@ Summary: dev components for the libwnck package.
 Group: Development
 Requires: libwnck-lib
 Requires: libwnck-bin
+Provides: libwnck-devel
 
 %description dev
 dev components for the libwnck package.
@@ -73,9 +79,12 @@ locales components for the libwnck package.
 
 %build
 %configure --disable-static
-make V=1 %{?_smp_mflags}
+make V=1  %{?_smp_mflags}
 
 %check
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install

@@ -4,7 +4,7 @@
 #
 Name     : libwnck
 Version  : 2.31.0
-Release  : 7
+Release  : 8
 URL      : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Source0  : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Summary  : Window Navigator Construction Kit library
@@ -12,10 +12,12 @@ Group    : Development/Tools
 License  : GPL-2.0 LGPL-2.0
 Requires: libwnck-bin
 Requires: libwnck-lib
+Requires: libwnck-data
 Requires: libwnck-doc
 Requires: libwnck-locales
 BuildRequires : docbook-xml
 BuildRequires : gettext
+BuildRequires : gobject-introspection-dev
 BuildRequires : gtk-doc
 BuildRequires : gtk-doc-dev
 BuildRequires : intltool
@@ -34,9 +36,18 @@ for writing pagers and taskslists and stuff.
 %package bin
 Summary: bin components for the libwnck package.
 Group: Binaries
+Requires: libwnck-data
 
 %description bin
 bin components for the libwnck package.
+
+
+%package data
+Summary: data components for the libwnck package.
+Group: Data
+
+%description data
+data components for the libwnck package.
 
 
 %package dev
@@ -44,6 +55,7 @@ Summary: dev components for the libwnck package.
 Group: Development
 Requires: libwnck-lib
 Requires: libwnck-bin
+Requires: libwnck-data
 Provides: libwnck-devel
 
 %description dev
@@ -61,6 +73,7 @@ doc components for the libwnck package.
 %package lib
 Summary: lib components for the libwnck package.
 Group: Libraries
+Requires: libwnck-data
 
 %description lib
 lib components for the libwnck package.
@@ -100,6 +113,10 @@ rm -rf %{buildroot}
 /usr/bin/wnck-urgency-monitor
 /usr/bin/wnckprop
 
+%files data
+%defattr(-,root,root,-)
+/usr/share/gir-1.0/Wnck-1.0.gir
+
 %files dev
 %defattr(-,root,root,-)
 /usr/include/libwnck-1.0/libwnck/application.h
@@ -116,6 +133,7 @@ rm -rf %{buildroot}
 /usr/include/libwnck-1.0/libwnck/wnck-enum-types.h
 /usr/include/libwnck-1.0/libwnck/workspace.h
 /usr/lib64/*.so
+/usr/lib64/girepository-1.0/Wnck-1.0.typelib
 /usr/lib64/pkgconfig/*.pc
 
 %files doc

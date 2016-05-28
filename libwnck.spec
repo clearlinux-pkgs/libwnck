@@ -4,7 +4,7 @@
 #
 Name     : libwnck
 Version  : 2.31.0
-Release  : 8
+Release  : 9
 URL      : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Source0  : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Summary  : Window Navigator Construction Kit library
@@ -21,6 +21,7 @@ BuildRequires : gobject-introspection-dev
 BuildRequires : gtk-doc
 BuildRequires : gtk-doc-dev
 BuildRequires : intltool
+BuildRequires : libXres-dev
 BuildRequires : libxslt-bin
 BuildRequires : perl(XML::Parser)
 BuildRequires : pkgconfig(gtk+-2.0)

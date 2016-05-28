@@ -3,4 +3,4 @@
 # desirable. One name per line, no whitespace.
 #
 gobject-introspection-dev
-
+libXres-dev

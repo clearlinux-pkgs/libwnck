@@ -4,15 +4,15 @@
 #
 Name     : libwnck
 Version  : 2.31.0
-Release  : 9
+Release  : 10
 URL      : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Source0  : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Summary  : Window Navigator Construction Kit library
 Group    : Development/Tools
-License  : GPL-2.0 LGPL-2.0
+License  : LGPL-2.0
 Requires: libwnck-bin
-Requires: libwnck-lib
 Requires: libwnck-data
+Requires: libwnck-lib
 Requires: libwnck-doc
 Requires: libwnck-locales
 BuildRequires : docbook-xml
@@ -92,16 +92,20 @@ locales components for the libwnck package.
 %setup -q -n libwnck-2.31.0
 
 %build
+export LANG=C
+export SOURCE_DATE_EPOCH=1491324563
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
 %check
+export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
+export SOURCE_DATE_EPOCH=1491324563
 rm -rf %{buildroot}
 %make_install
 %find_lang libwnck
@@ -116,7 +120,8 @@ rm -rf %{buildroot}
 
 %files data
 %defattr(-,root,root,-)
-/usr/share/gir-1.0/Wnck-1.0.gir
+/usr/lib64/girepository-1.0/Wnck-1.0.typelib
+/usr/share/gir-1.0/*.gir
 
 %files dev
 %defattr(-,root,root,-)
@@ -133,9 +138,8 @@ rm -rf %{buildroot}
 /usr/include/libwnck-1.0/libwnck/window.h
 /usr/include/libwnck-1.0/libwnck/wnck-enum-types.h
 /usr/include/libwnck-1.0/libwnck/workspace.h
-/usr/lib64/*.so
-/usr/lib64/girepository-1.0/Wnck-1.0.typelib
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libwnck-1.so
+/usr/lib64/pkgconfig/libwnck-1.0.pc
 
 %files doc
 %defattr(-,root,root,-)
@@ -180,8 +184,9 @@ rm -rf %{buildroot}
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libwnck-1.so.22
+/usr/lib64/libwnck-1.so.22.4.0
 
-%files locales -f libwnck.lang 
+%files locales -f libwnck.lang
 %defattr(-,root,root,-)
 

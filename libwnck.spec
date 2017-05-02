@@ -4,7 +4,7 @@
 #
 Name     : libwnck
 Version  : 2.31.0
-Release  : 10
+Release  : 11
 URL      : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Source0  : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Summary  : Window Navigator Construction Kit library

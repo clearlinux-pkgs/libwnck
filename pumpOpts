@@ -1,1 +1,4 @@
-major2
+# specify a major version
+major = 2
+# upstream dev version to not be considered
+devel = 91

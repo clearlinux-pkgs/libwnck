@@ -4,9 +4,9 @@
 #
 Name     : libwnck
 Version  : 2.31.0
-Release  : 11
-URL      : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
-Source0  : http://ftp.gnome.org/pub/GNOME/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
+Release  : 12
+URL      : https://download.gnome.org/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
+Source0  : https://download.gnome.org/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Summary  : Window Navigator Construction Kit library
 Group    : Development/Tools
 License  : LGPL-2.0
@@ -24,6 +24,8 @@ BuildRequires : intltool
 BuildRequires : libXres-dev
 BuildRequires : libxslt-bin
 BuildRequires : perl(XML::Parser)
+BuildRequires : pkgconfig(glib-2.0)
+BuildRequires : pkgconfig(gobject-2.0)
 BuildRequires : pkgconfig(gtk+-2.0)
 BuildRequires : pkgconfig(libstartup-notification-1.0)
 BuildRequires : pkgconfig(x11)
@@ -92,8 +94,11 @@ locales components for the libwnck package.
 %setup -q -n libwnck-2.31.0
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1491324563
+export SOURCE_DATE_EPOCH=1508275954
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -101,11 +106,11 @@ make V=1  %{?_smp_mflags}
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1491324563
+export SOURCE_DATE_EPOCH=1508275954
 rm -rf %{buildroot}
 %make_install
 %find_lang libwnck

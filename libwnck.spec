@@ -4,10 +4,10 @@
 #
 Name     : libwnck
 Version  : 2.31.0
-Release  : 16
+Release  : 17
 URL      : https://download.gnome.org/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
 Source0  : https://download.gnome.org/sources/libwnck/2.31/libwnck-2.31.0.tar.xz
-Summary  : Window Navigator Construction Kit
+Summary  : Window Navigator Construction Kit library
 Group    : Development/Tools
 License  : LGPL-2.0
 Requires: libwnck-bin = %{version}-%{release}
@@ -104,35 +104,37 @@ locales components for the libwnck package.
 
 %prep
 %setup -q -n libwnck-2.31.0
+cd %{_builddir}/libwnck-2.31.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557018657
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1586242279
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1557018657
+export SOURCE_DATE_EPOCH=1586242279
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libwnck
-cp COPYING %{buildroot}/usr/share/package-licenses/libwnck/COPYING
+cp %{_builddir}/libwnck-2.31.0/COPYING %{buildroot}/usr/share/package-licenses/libwnck/ba8966e2473a9969bdcab3dc82274c817cfd98a1
 %make_install
 %find_lang libwnck
 
@@ -215,7 +217,7 @@ cp COPYING %{buildroot}/usr/share/package-licenses/libwnck/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libwnck/COPYING
+/usr/share/package-licenses/libwnck/ba8966e2473a9969bdcab3dc82274c817cfd98a1
 
 %files locales -f libwnck.lang
 %defattr(-,root,root,-)
